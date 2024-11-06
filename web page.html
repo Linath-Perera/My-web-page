@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Breath Hospital - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://via.placeholder.com/1920x1080'); /* Replace with hospital background image URL */
+            background-size: cover;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .home-btn { background-color: #3498db; color: white; }
+        .login-btn { background-color: #2ecc71; color: white; }
+        .signup-btn { background-color: #e74c3c; color: white; }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .message {
+            color: red;
+            font-size: 14px;
+        }
+        .success-message {
+            color: green;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="homePage">
+        <h1>New Breath Hospital</h1>
+        <button class="btn home-btn" onclick="showHome()">Home</button>
+        <button class="btn login-btn" onclick="showLoginPage()">Log In</button>
+        <button class="btn signup-btn" onclick="showSignUpPage()">Sign Up</button>
+    </div>
+
+    <!-- Login Page -->
+    <div class="container" id="loginPage" style="display: none;">
+        <h2>Login</h2>
+        <input type="text" class="input-field" id="username" placeholder="Username">
+        <input type="password" class="input-field" id="password" placeholder="Password">
+        <button class="btn login-btn" onclick="validateLogin()">Submit</button>
+        <button class="btn home-btn" onclick="showHome()" style="display: none;" id="backHomeBtn">Back to Home</button>
+        <p class="message" id="loginMessage"></p>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div class="container" id="signupPage" style="display: none;">
+        <h2>Sign Up</h2>
+        <button class="btn signup-btn" onclick="showPatientForm()">Create New Account</button>
+        <p class="success-message" id="signupMessage"></p>
+    </div>
+
+    <!-- Patient Information Form Page -->
+    <div class="container" id="patientFormPage" style="display: none;">
+        <h2>Patient Registration</h2>
+        <input type="text" class="input-field" id="patientName" placeholder="Full Name">
+        <input type="number" class="input-field" id="patientAge" placeholder="Age">
+        <select class="input-field" id="patientSex">
+            <option value="">Select Sex</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" class="input-field" id="patientAddress" placeholder="Address">
+        <input type="tel" class="input-field" id="patientPhone" placeholder="Phone Number">
+        <input type="email" class="input-field" id="patientEmail" placeholder="Email">
+        <input type="text" class="input-field" id="patientRegNumber" placeholder="Registration Number">
+        <input type="text" class="input-field" id="doctorName" placeholder="Specialist Doctor's Name">
+        <button class="btn home-btn" onclick="showHome()">Back to Page</button>
+        <button class="btn signup-btn" onclick="showClinicList()">Create Account</button>
+        <p class="success-message" id="formMessage"></p>
+    </div>
+
+    <!-- Clinic List Page -->
+    <div class="container" id="clinicListPage" style="display: none;">
+        <h2>Clinic List</h2>
+        <ul style="text-align: left;">
+            <li>1. Emergency Department</li>
+            <li>2. Surgery Department (Operating Theater)</li>
+            <li>3. Outpatient Department</li>
+            <li>4. Inpatient Department</li>
+            <li>5. Intensive Care Unit (ICU)</li>
+            <li>6. Cardiology Department</li>
+            <li>7. Neurology Department</li>
+            <li>8. Psychiatry Department</li>
+            <li>9. Radiology Department</li>
+            <li>10. Laboratory Department</li>
+        </ul>
+        <button class="btn home-btn" onclick="showHome()">Back to Home</button>
+    </div>
+
+    <script>
+        function showHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'none';
+            document.getElementById('patientFormPage').style.display = 'none';
+            document.getElementById('clinicListPage').style.display = 'none';
+        }
+
+        function showLoginPage() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+            document.getElementById('signupPage').style.display = 'none';
+            document.getElementById('patientFormPage').style.display = 'none';
+            document.getElementById('clinicListPage').style.display = 'none';
+            document.getElementById('loginMessage').innerText = '';
+            document.getElementById('backHomeBtn').style.display = 'none';
+        }
+
+        function showSignUpPage() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'block';
+            document.getElementById('patientFormPage').style.display = 'none';
+            document.getElementById('clinicListPage').style.display = 'none';
+            document.getElementById('signupMessage').innerText = '';
+        }
+
+        function showPatientForm() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'none';
+            document.getElementById('patientFormPage').style.display = 'block';
+            document.getElementById('clinicListPage').style.display = 'none';
+            document.getElementById('formMessage').innerText = '';
+        }
+
+        function showClinicList() {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('signupPage').style.display = 'none';
+            document.getElementById('patientFormPage').style.display = 'none';
+            document.getElementById('clinicListPage').style.display = 'block';
+        }
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginMessage = document.getElementById('loginMessage');
+            const backHomeBtn = document.getElementById('backHomeBtn');
+
+            if (username === "2022IT" && password === "123456") {
+                loginMessage.style.color = 'green';
+                loginMessage.innerText = "Login successful!";
+                backHomeBtn.style.display = 'block';
+            } else {
+                loginMessage.style.color = 'red';
+                loginMessage.innerText = "Sorry, you entered an invalid username or password.";
+                backHomeBtn.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
